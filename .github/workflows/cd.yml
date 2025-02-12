@@ -3,13 +3,11 @@ name: CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger deployment when code is pushed to main
+      - main
 
 jobs:
   deploy:
-    name: Deploy Application
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,13 +19,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/ubuntu/fastapi-book-project || git clone <your-github-repo> /home/ubuntu/fastapi-book-project
-            cd /home/ubuntu/fastapi-book-project
+            echo "✅ Connected to server!"
+            cd /home/ubuntu/
             git pull origin main
-
-            # Build and run the container locally
-            docker stop fastapi-container || true
-            docker rm fastapi-container || true
-            docker build -t fastapi-app .
-            docker run -d --name fastapi-container -p 8000:8000 --restart=always fastapi-app
-
+            docker-compose up -d --build
