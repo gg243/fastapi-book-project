@@ -1,15 +1,23 @@
-name: SSH Secrets
+name: CD Pipeline
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  debug:
+  deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
       - name: Check GitHub Secrets (Masked)
         run: |
-          echo "SERVER_HOST: ${{ secrets.SERVER_HOST }}"
-          echo "SERVER_USER: ${{ secrets.SERVER_USER }}"
-          echo "SSH_PRIVATE_KEY length: $(echo "${{ secrets.SSH_PRIVATE_KEY }}" | wc -c)"
+                echo "SERVER_HOST: ${{ secrets.SERVER_HOST }}"
+                echo "SERVER_USER: ${{ secrets.SERVER_USER }}"
+                echo "SSH_PRIVATE_KEY length: $(echo "${{ secrets.SSH_PRIVATE_KEY }}" | wc -c)"
+
+      
 
