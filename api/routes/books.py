@@ -41,7 +41,6 @@ async def create_book(book: Book):
     )
 
 
-
 @router.get(
     "/", response_model=OrderedDict[int, Book], status_code=status.HTTP_200_OK
 )
@@ -55,6 +54,7 @@ async def get_book_by_id(book_id: int) -> Book:
     if book is None:
         raise HTTPException(status_code=404, detail="Book not found")
     return book
+
 
 
 @router.put("/{book_id}", response_model=Book, status_code=status.HTTP_200_OK)
