@@ -13,3 +13,11 @@ jobs:
         run: |
           echo "Runner OS: $(uname -a)"
           echo "SSH version: $(ssh -V)"
+
+      - name: Add SSH private key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: SSH into EC2
+        run: ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@54.243.8.0
