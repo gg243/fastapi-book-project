@@ -9,15 +9,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Debug runner environment
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Connect to Server via SSH
         run: |
-          echo "Runner OS: $(uname -a)"
-          echo "SSH version: $(ssh -V)"
-
-      - name: Add SSH private key
-        uses: webfactory/ssh-agent@v0.7.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: SSH into EC2
-        run: ssh -v -o StrictHostKeyChecking=no ubuntu@54.243.8.0
+          mkdir -p ~/.ssh
+          echo "-----BEGIN RSA PRIVATE KEY-----
+          MIIEpAIBAAKCAQEA0PkEO6jdwD6TUGrEIykV9PgtRPT1P23zGyyMI+czgb+FtVtH
+          ...
+          gmTkdEoBAoGBAPmoKIH9G9y5Fv0mJb5qiOtYa+01o08MuJ5l5dSz0nDvvHhVQij0
+          -----END RSA PRIVATE KEY-----" > ~/.ssh/private_key.pem
+          
+          chmod 600 ~/.ssh/private_key.pem
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/private_key.pem ubuntu@54.243.8.0 "echo 'Successfully connected to the server!'"
