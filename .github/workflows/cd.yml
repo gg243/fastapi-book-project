@@ -20,4 +20,4 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: SSH into EC2
-        run: ssh -v -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@54.243.8.0
+        run: ssh -v -o StrictHostKeyChecking=no ubuntu@54.243.8.0
