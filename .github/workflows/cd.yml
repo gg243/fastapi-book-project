@@ -12,4 +12,4 @@ jobs:
       - name: Debug runner environment
         run: |
           echo "Runner OS: $(uname -a)"
-          cho "SSH version: $(ssh -V)"
+          echo "SSH version: $(ssh -V)"
