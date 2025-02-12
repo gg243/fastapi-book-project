@@ -19,6 +19,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_HOST }}  # Add this to skip SSH host key verification
           script: |
             # Update package index and install dependencies
             sudo apt-get update -y
@@ -47,7 +48,7 @@ jobs:
             # Navigate to the project directory and deploy
             cd /home/ubuntu/
             if [ ! -d "fastapi-book-project" ]; then
-              git clone <your-github-repo>
+              git clone https://github.com/yourusername/your-repository.git fastapi-book-project
             fi
             cd fastapi-book-project/
             git pull origin main
