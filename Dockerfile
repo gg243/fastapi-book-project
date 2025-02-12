@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 #Set work directory
-WORKDIR/app
+WORKDIR /app
 
 # Copy only the necessary files
 COPY requirements.txt .
@@ -18,3 +18,4 @@ EXPOSE 8000
 
 # Run the FastApi api application
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "8000"]
+
