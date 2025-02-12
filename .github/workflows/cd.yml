@@ -12,3 +12,4 @@ jobs:
           echo "SERVER_HOST: ${{ secrets.SERVER_HOST }}"
           echo "SERVER_USER: ${{ secrets.SERVER_USER }}"
           echo "SSH_PRIVATE_KEY length: $(echo "${{ secrets.SSH_PRIVATE_KEY }}" | wc -c)"
+
