@@ -1,4 +1,4 @@
-name: Debug SSH Secrets
+name: SSH Secrets
 
 on:
   workflow_dispatch:
