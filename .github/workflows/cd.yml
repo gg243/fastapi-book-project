@@ -9,25 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Debug GitHub Secrets
+      - name: Debug runner environment
         run: |
-          echo "SERVER_HOST: ${{ secrets.SERVER_HOST }}"
-          echo "SERVER_USER: ${{ secrets.SERVER_USER }}"
-          echo "SSH_PRIVATE_KEY length: $(echo "${{ secrets.SSH_PRIVATE_KEY }}" | wc -c)"
-
-      - name: Connect to Server via SSH
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: |
-            ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            echo "✅ Successfully connected to the server!"
-            whoami
-            ls -la
-        env:
-          DEBUG: true
+          echo "Runner OS: $(uname -a)"
+          cho "SSH version: $(ssh -V)"
