@@ -36,3 +36,4 @@ jobs:
             docker run -d -p 8000:8000 --name fastapi-app aiyus1/fastapi-app:latest
           EOF
           rm -f private_key
+
